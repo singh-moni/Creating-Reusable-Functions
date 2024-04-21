@@ -15,12 +15,12 @@ console.log(`Sum of Numbers is : ${sumOfArray(numbers)}`); // Output will be 150
 
 // Calculating the Avarage Function//
 function avgOfArray(numbers) {
-   
-let sum1 = 0;
+
+    let sum1 = 0;
     for (let i = 0; i < numbers.length; i++) {
         sum1 += numbers[i]; // Summing up all the numbers in the array
     }
-    
+
     return sum1 / numbers.length; // Calculating the average
 }
 
@@ -43,13 +43,111 @@ function longestString(strings) {
 
     for (const str of strings) {
         if (str.length > longest.length) {
-            longest = str; // Update longest if a longer string is found
+            longest = str; // Updates longest if a longer string is found
         }
     }
 
-    return longest; // Return the longest string
+    return longest; // Returns the longest string
+}
+
+// Example://
+const arrayOfStrings = ["Pineapple", "Organic-banana", "Mandarin-orange", "strawberry"];
+console.log(longestString(arrayOfStrings)); // Output will be "Mandarin-orange"
+
+console.log(`==========================================================================================`)
+
+//Take an array of strings, and a number and return an array of the strings that are longer than the given number. //
+function wordsLongerThan(words, number) {
+    const longerwords = [];
+
+    for (const word of words) {
+        if (word.length > number) {
+            longerwords.push(word);
+        }
+    }
+
+    return longerwords;
+}
+
+// Example://
+const words = ['say', 'hello', 'in', 'the', 'morning'];
+const number = 3;
+console.log(wordsLongerThan(words, number))
+
+console.log("=================================================================================")
+
+//Take a number, n, and print every number between 1 and n without using loops. Use recursion.//
+/*function printNumbers(n) {
+    let i = 1;
+    while (i <= n) {
+        console.log(i);
+        i++;
+    }
 }
 
 // Example usage:
-const arrayOfStrings = ["Pineapple", "Organic-banana", "Mandarin-orange", "strawberry"];
-console.log(longestString(arrayOfStrings)); // Output will be ""
+const n = 10;
+printNumbers(n);
+*/
+
+function printNumbersTill(n) {
+    if (n <= 0) {
+        return;
+    }
+
+    printNumbersTill(n - 1); // Recursively call the function with n - 1
+    console.log(n); // Print the current value of n
+}
+
+
+const n = 10;
+printNumbersTill(n);
+
+console.log("====================Part-2=======================================")
+//Filter the array to remove entries with an age greater than 50.//
+
+const people = [
+    { id: "42", name: "Bruce", occupation: "Knight", age: "41" },
+    { id: "48", name: "Barry", occupation: "Runner", age: "25" },
+    { id: "57", name: "Bob", occupation: "Fry Cook", age: "19" },
+    { id: "63", name: "Blaine", occupation: "Quiz Master", age: "58" },
+    { id: "7", name: "Bilbo", occupation: "None", age: "111" }
+];
+
+const filteredPeople = [];
+for (let i = 0; i < people.length; i++) {
+    if (+people[i].age <= 50) {
+        filteredPeople.push(people[i]);
+    }
+}
+
+console.log(filteredPeople);
+
+console.log(`=================================================================`)
+//Map the array to change the “occupation” key to “job” and increment every age by 1.//
+
+const modifiedPeople = people.map(person => ({
+    ...person,
+    job: person.occupation,
+    age: (parseInt(person.age) + 1).toString()
+}));
+
+console.log(modifiedPeople);
+
+
+//Use the reduce method to calculate the sum of the ages.//
+
+const people2 = [
+    { id: "42", name: "Bruce", occupation: "Knight", age: "41" },
+    { id: "48", name: "Barry", occupation: "Runner", age: "25" },
+    { id: "57", name: "Bob", occupation: "Fry Cook", age: "19" },
+    { id: "63", name: "Blaine", occupation: "Quiz Master", age: "58" },
+    { id: "7", name: "Bilbo", occupation: "None", age: "111" }
+];
+
+const sumOfAges = people2.reduce((total, person, index) => total + parseInt(person.age), 0);
+
+console.log(sumOfAges);
+const averageAge = sumOfAges / people.length;
+
+console.log(averageAge);
